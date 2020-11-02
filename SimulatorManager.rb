@@ -1,6 +1,6 @@
 #!/usr/bin/env ruby
 require 'pathname'
-require 'trollop'
+require 'optimist'
 require './Simulator'
 require './SimulatorMgr'
 
@@ -17,7 +17,7 @@ def showWarningMessage(message)
   puts "⚠️   #{message}".yellow
 end
 
-opts = Trollop::options do
+opts = Optimist::options do
   opt :start, "Boot a device with id", :short => :s
   opt :shutdown, "Shutdown a device with id", :short => :w
   opt :install, "Install app into device", :short => :i

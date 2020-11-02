@@ -1,5 +1,5 @@
 source 'https://rubygems.org'
 
-gem 'trollop'
+gem 'optimist'
 gem 'open3'
 gem 'colorize'
