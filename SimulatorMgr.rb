@@ -13,9 +13,20 @@ class SimulatorManager
   def listDevices()
     @simulators.each do |simulator|
         puts ""
-        puts "#{simulator.name} => #{simulator.udid}".green
-        puts "Booted = #{simulator.booted} Available = #{simulator.available}"
-        puts ""
+        puts "udid => " + "#{simulator.udid}".green
+        puts "name => " + "#{simulator.name}".yellow
+        
+        if simulator.booted == false 
+          puts "booted => " + "#{simulator.booted}".red 
+        else
+          puts "booted => " + "#{simulator.booted}".green 
+        end
+
+        if simulator.booted == false 
+          puts "available => " + "#{simulator.available}".red 
+        else
+          puts "available => " + "#{simulator.available}".green 
+        end
     end
   end
 
