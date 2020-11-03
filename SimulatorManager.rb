@@ -28,7 +28,8 @@ opts = Optimist::options do
 end
 
 if opts[:list]
-  SimulatorManager.list(opts[:list])
+  m = SimulatorManager.new
+  m.listDevices(opts[:list])
 end
 
 if opts[:start]

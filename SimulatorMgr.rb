@@ -11,10 +11,10 @@ class SimulatorManager
   end
 
   def listDevices(nameFilter)
-    filtered = @simulators
+    filtered = simulators
 
     if nameFilter != "all"
-      filtered = @simulators.select {|simulator| simulator.name.include? nameFilter}
+      filtered = simulators.select {|simulator| simulator.name.include? nameFilter}
 
       if filtered.empty?
         showErrorMessage("No simulator was found with provided name filter")
@@ -39,11 +39,6 @@ class SimulatorManager
           puts "available => " + "#{simulator.available}".green 
         end
     end
-  end
-
-  def self.list(nameFilter)
-    m = SimulatorManager.new
-    m.listDevices(nameFilter)
   end
 
   def startDevice(udid)
