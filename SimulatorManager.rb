@@ -25,11 +25,11 @@ opts = Optimist::options do
   opt :app, "Specify .app path <dir/to/My.app> scaped ", :type => :string
   opt :device, "Specify a device <3D077F6E-C82B-4DCD-A355-8ACA9AC43EF6>", :type => :string
   opt :bundle, "Specify app bundle id <br.com.myapp>", :type => :string
-  opt :list, "List all devices"
+  opt :list, "List all devices", :default => "all"
 end
 
 if opts[:list]
-  SimulatorManager.list()
+  SimulatorManager.list(opts[:list])
 end
 
 if opts[:start]

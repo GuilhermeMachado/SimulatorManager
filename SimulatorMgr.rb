@@ -10,8 +10,19 @@ class SimulatorManager
     createSimulators()
   end
 
-  def listDevices()
-    @simulators.each do |simulator|
+  def listDevices(nameFilter)
+    filtered = @simulators
+
+    if nameFilter != "all"
+      filtered = @simulators.select {|simulator| simulator.name.include? nameFilter}
+
+      if filtered.empty?
+        showErrorMessage("No simulator was found with provided name filter")
+        exit(1)
+      end
+    end
+
+    filtered.each do |simulator|
         puts ""
         puts "udid => " + "#{simulator.udid}".green
         puts "name => " + "#{simulator.name}".yellow
@@ -30,9 +41,9 @@ class SimulatorManager
     end
   end
 
-  def self.list()
+  def self.list(nameFilter)
     m = SimulatorManager.new
-    m.listDevices()
+    m.listDevices(nameFilter)
   end
 
   def startDevice(udid)
