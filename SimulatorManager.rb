@@ -29,13 +29,13 @@ end
 
 if opts[:list]
   m = SimulatorManager.new
-  m.listDevices(opts[:list])
+  m.list_devices(opts[:list])
 end
 
 if opts[:start]
   if !opts[:device].nil?
     m = SimulatorManager.new
-    m.startDevice(opts[:device])
+    m.start_device(opts[:device])
   else
     show_error_message('Not found required params --device')
   end
@@ -44,7 +44,7 @@ end
 if opts[:shutdown]
   if !opts[:device].nil?
     m = SimulatorManager.new
-    m.shutdownDevice(opts[:device])
+    m.shutdown_device(opts[:device])
   else
     show_error_message('Not found required params --device')
   end
@@ -54,7 +54,7 @@ if opts[:install]
   if !opts[:app].nil? && !opts[:device].nil?
     show_warning_message('Not found bundle param. The application will not be reinstalled') if opts[:bundle].nil?
     m = SimulatorManager.new
-    m.installApp(opts[:app], opts[:device], opts[:bundle])
+    m.install_app(opts[:app], opts[:device], opts[:bundle])
   else
     show_error_message('Not found required params --app && --device')
   end
@@ -63,7 +63,7 @@ end
 if opts[:remove]
   if !opts[:device].nil? && !opts[:bundle].nil?
     m = SimulatorManager.new
-    m.removeApp(opts[:device], opts[:bundle])
+    m.remove_application(opts[:device], opts[:bundle])
   else
     show_error_message('Not found required params --device')
   end

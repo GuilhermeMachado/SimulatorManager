@@ -8,7 +8,7 @@ begin
 
   simulator_manager = SimulatorManager.new
 
-  simulator = simulator_manager.findSimulatorByUdid(data_hash['udid'])
+  simulator = simulator_manager.fine_simulator_by_udid(data_hash['udid'])
 rescue SystemCallError => e
   puts(e.class)
 end

@@ -7,10 +7,10 @@ class SimulatorManager
 
   def initialize
     @simulators = []
-    createSimulators
+    create_simulators
   end
 
-  def listDevices(nameFilter)
+  def list_devices(nameFilter)
     filtered = simulators
 
     if nameFilter != 'all'
@@ -41,8 +41,8 @@ class SimulatorManager
     end
   end
 
-  def startDevice(udid)
-    simulator = findSimulatorByUdid(udid)
+  def start_device(udid)
+    simulator = fine_simulator_by_udid(udid)
 
     if simulator.booted == true
       show_error_message('Simulator already booted')
@@ -61,8 +61,8 @@ class SimulatorManager
     end
   end
 
-  def shutdownDevice(udid)
-    simulator = findSimulatorByUdid(udid)
+  def shutdown_device(udid)
+    simulator = fine_simulator_by_udid(udid)
 
     show_warning_message('Simulator already offline') if simulator.booted == false
 
@@ -78,19 +78,19 @@ class SimulatorManager
     end
   end
 
-  def installApp(path, udid, bundle)
+  def install_app(path, udid, bundle)
     puts 'SimulatorManager => Path => ' + path
     puts 'SimulatorManager => udid => ' + udid
 
-    simulator = findSimulatorByUdid(udid)
+    simulator = fine_simulator_by_udid(udid)
 
-    startDevice(simulator.udid) if simulator.booted == false
+    start_device(simulator.udid) if simulator.booted == false
 
     unless bundle.nil?
       puts 'SimulatorManager => bundle => ' + bundle
-      if !findAppInSimulator(simulator.udid, bundle).empty?
+      if !find_application_in_simulator(simulator.udid, bundle).empty?
         puts show_success_message('App localizado')
-        removeAppFromSimulator(simulator.udid, bundle)
+        remove_application_from_simulator(simulator.udid, bundle)
       else
         show_error_message('App não localizado')
       end
@@ -103,25 +103,25 @@ class SimulatorManager
     if status.success?
       show_success_message('APPLICATION INSTALLED INTO ' + simulator.udid)
       show_success_message(path)
-      shutdownDevice(simulator.udid)
+      shutdown_device(simulator.udid)
     else
       show_error_message('Error while installing the app into simulator.')
       exit(1)
     end
   end
 
-  def removeApp(udid, bundle)
-    simulator = findSimulatorByUdid(udid)
+  def remove_application(udid, bundle)
+    simulator = fine_simulator_by_udid(udid)
 
-    if !findAppInSimulator(udid, bundle).empty?
+    if !find_application_in_simulator(udid, bundle).empty?
       puts show_success_message('App localizado')
-      removeAppFromSimulator(udid, bundle)
+      remove_application_from_simulator(udid, bundle)
     else
       show_error_message('App not found into simulator ' + udid)
     end
   end
 
-  def findSimulatorByUdid(udid)
+  def fine_simulator_by_udid(udid)
     simulator = simulators.select { |simulator| simulator.udid == udid }.first
 
     if simulator.nil?
@@ -134,7 +134,7 @@ class SimulatorManager
 
   private
 
-  def createSimulators
+  def create_simulators
     devices = JSON.parse `xcrun simctl list -j devices`
 
     devices['devices'].each do |_runtime, runtime_devices|
@@ -144,12 +144,12 @@ class SimulatorManager
     end
   end
 
-  def findAppInSimulator(udid, bundle)
+  def find_application_in_simulator(udid, bundle)
     stdout, status = Open3.capture2('xcrun simctl get_app_container ' + udid + ' ' + bundle)
     stdout
   end
 
-  def removeAppFromSimulator(udid, bundle)
+  def remove_application_from_simulator(udid, bundle)
     pid = fork { exec('xcrun simctl uninstall ' + udid + ' ' + bundle) }
     puts 'Removing app from device 📲  => ' + udid
     _, status = Process.waitpid2(pid)
