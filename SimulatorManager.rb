@@ -8,11 +8,11 @@ def show_error_message(message)
   puts "❌   #{message}".red
 end
 
-def showSuccessMessage(message)
+def show_success_message(message)
   puts "✅   #{message}".green
 end
 
-def showWarningMessage(message)
+def show_warning_message(message)
   puts "⚠️   #{message}".yellow
 end
 
@@ -52,7 +52,7 @@ end
 
 if opts[:install]
   if !opts[:app].nil? && !opts[:device].nil?
-    showWarningMessage('Not found bundle param. The application will not be reinstalled') if opts[:bundle].nil?
+    show_warning_message('Not found bundle param. The application will not be reinstalled') if opts[:bundle].nil?
     m = SimulatorManager.new
     m.installApp(opts[:app], opts[:device], opts[:bundle])
   else

@@ -54,7 +54,7 @@ class SimulatorManager
     _, status = Process.waitpid2(pid)
 
     if status.success?
-      showSuccessMessage('Device booted ' + udid)
+      show_success_message('Device booted ' + udid)
     else
       show_error_message('Error while booting the device')
       exit(1)
@@ -64,14 +64,14 @@ class SimulatorManager
   def shutdownDevice(udid)
     simulator = findSimulatorByUdid(udid)
 
-    showWarningMessage('Simulator already offline') if simulator.booted == false
+    show_warning_message('Simulator already offline') if simulator.booted == false
 
     pid = fork { exec('xcrun simctl shutdown ' + udid) }
     puts 'Turning off device 📲  => ' + udid
     _, status = Process.waitpid2(pid)
 
     if status.success?
-      showSuccessMessage('Device offline ' + udid)
+      show_success_message('Device offline ' + udid)
     else
       show_error_message('Error while Turning off the device')
       exit(1)
@@ -89,7 +89,7 @@ class SimulatorManager
     unless bundle.nil?
       puts 'SimulatorManager => bundle => ' + bundle
       if !findAppInSimulator(simulator.udid, bundle).empty?
-        puts showSuccessMessage('App localizado')
+        puts show_success_message('App localizado')
         removeAppFromSimulator(simulator.udid, bundle)
       else
         show_error_message('App não localizado')
@@ -101,8 +101,8 @@ class SimulatorManager
     _, status = Process.waitpid2(pid)
 
     if status.success?
-      showSuccessMessage('APPLICATION INSTALLED INTO ' + simulator.udid)
-      showSuccessMessage(path)
+      show_success_message('APPLICATION INSTALLED INTO ' + simulator.udid)
+      show_success_message(path)
       shutdownDevice(simulator.udid)
     else
       show_error_message('Error while installing the app into simulator.')
@@ -114,7 +114,7 @@ class SimulatorManager
     simulator = findSimulatorByUdid(udid)
 
     if !findAppInSimulator(udid, bundle).empty?
-      puts showSuccessMessage('App localizado')
+      puts show_success_message('App localizado')
       removeAppFromSimulator(udid, bundle)
     else
       show_error_message('App not found into simulator ' + udid)
