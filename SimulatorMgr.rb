@@ -17,7 +17,7 @@ class SimulatorManager
       filtered = simulators.select { |simulator| simulator.name.include? nameFilter }
 
       if filtered.empty?
-        showErrorMessage('No simulator was found with provided name filter')
+        show_error_message('No simulator was found with provided name filter')
         exit(1)
       end
     end
@@ -45,7 +45,7 @@ class SimulatorManager
     simulator = findSimulatorByUdid(udid)
 
     if simulator.booted == true
-      showErrorMessage('Simulator already booted')
+      show_error_message('Simulator already booted')
       exit(1)
     end
 
@@ -56,7 +56,7 @@ class SimulatorManager
     if status.success?
       showSuccessMessage('Device booted ' + udid)
     else
-      showErrorMessage('Error while booting the device')
+      show_error_message('Error while booting the device')
       exit(1)
     end
   end
@@ -73,7 +73,7 @@ class SimulatorManager
     if status.success?
       showSuccessMessage('Device offline ' + udid)
     else
-      showErrorMessage('Error while Turning off the device')
+      show_error_message('Error while Turning off the device')
       exit(1)
     end
   end
@@ -92,7 +92,7 @@ class SimulatorManager
         puts showSuccessMessage('App localizado')
         removeAppFromSimulator(simulator.udid, bundle)
       else
-        showErrorMessage('App não localizado')
+        show_error_message('App não localizado')
       end
     end
     puts 'SimulatorManager => Next command => ' + 'xcrun simctl install "' + simulator.udid + '" "' + path + '"'
@@ -105,7 +105,7 @@ class SimulatorManager
       showSuccessMessage(path)
       shutdownDevice(simulator.udid)
     else
-      showErrorMessage('Error while installing the app into simulator.')
+      show_error_message('Error while installing the app into simulator.')
       exit(1)
     end
   end
@@ -117,7 +117,7 @@ class SimulatorManager
       puts showSuccessMessage('App localizado')
       removeAppFromSimulator(udid, bundle)
     else
-      showErrorMessage('App not found into simulator ' + udid)
+      show_error_message('App not found into simulator ' + udid)
     end
   end
 
@@ -125,7 +125,7 @@ class SimulatorManager
     simulator = simulators.select { |simulator| simulator.udid == udid }.first
 
     if simulator.nil?
-      showErrorMessage('Simulator not found')
+      show_error_message('Simulator not found')
       exit(1)
     end
 
@@ -157,7 +157,7 @@ class SimulatorManager
     if status.success?
       puts '❎   App ' + bundle + ' removed from ' + udid
     else
-      showErrorMessage('Error while removing app')
+      show_error_message('Error while removing app')
       exit(1)
     end
   end

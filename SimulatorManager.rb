@@ -4,7 +4,7 @@ require './Simulator'
 require './SimulatorMgr'
 
 #### Main
-def showErrorMessage(message)
+def show_error_message(message)
   puts "❌   #{message}".red
 end
 
@@ -37,7 +37,7 @@ if opts[:start]
     m = SimulatorManager.new
     m.startDevice(opts[:device])
   else
-    showErrorMessage('Not found required params --device')
+    show_error_message('Not found required params --device')
   end
 end
 
@@ -46,7 +46,7 @@ if opts[:shutdown]
     m = SimulatorManager.new
     m.shutdownDevice(opts[:device])
   else
-    showErrorMessage('Not found required params --device')
+    show_error_message('Not found required params --device')
   end
 end
 
@@ -56,7 +56,7 @@ if opts[:install]
     m = SimulatorManager.new
     m.installApp(opts[:app], opts[:device], opts[:bundle])
   else
-    showErrorMessage('Not found required params --app && --device')
+    show_error_message('Not found required params --app && --device')
   end
 end
 
@@ -65,6 +65,6 @@ if opts[:remove]
     m = SimulatorManager.new
     m.removeApp(opts[:device], opts[:bundle])
   else
-    showErrorMessage('Not found required params --device')
+    show_error_message('Not found required params --device')
   end
 end
