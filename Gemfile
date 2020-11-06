@@ -1,7 +1,7 @@
 source 'https://rubygems.org'
 
-gem 'optimist'
-gem 'open3'
 gem 'colorize'
 gem 'json'
+gem 'open3'
+gem 'optimist'
 gem 'rubocop', require: false

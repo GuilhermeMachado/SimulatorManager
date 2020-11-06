@@ -1,7 +1,6 @@
 require 'JSON'
 
 class Simulator
-
   attr_accessor :name
   attr_accessor :udid
   attr_accessor :booted
@@ -13,5 +12,4 @@ class Simulator
     @booted = booted == 'Booted'
     @available = available == '(available)'
   end
-
 end
