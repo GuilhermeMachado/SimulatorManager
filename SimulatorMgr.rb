@@ -1,5 +1,6 @@
 require 'open3'
 require 'colorize'
+require './Simulator.rb'
 
 class SimulatorManager
 
@@ -132,6 +133,19 @@ class SimulatorManager
 
   end
 
+  def findSimulatorByUdid(udid)
+
+    simulator = simulators.select {|simulator| simulator.udid == udid}.first
+
+    if simulator == nil
+      showErrorMessage("Simulator not found")
+      exit(1)
+    end
+
+    return simulator
+
+  end
+
   private
 
   def createSimulators()
@@ -143,19 +157,6 @@ class SimulatorManager
         @simulators << Simulator.new(device['name'],device['udid'],device['state'],device['availability'])
       end
     end
-
-  end
-
-  def findSimulatorByUdid(udid)
-
-    simulator = simulators.select {|simulator| simulator.udid == udid}.first
-
-    if simulator == nil
-      showErrorMessage("Simulator not found")
-      exit(1)
-    end
-
-    return simulator
 
   end
 
