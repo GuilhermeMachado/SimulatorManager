@@ -1,5 +1,5 @@
 require 'test/unit'
-require '../lib/simulator_manager/simulator_mgr'
+require File.dirname(__FILE__) + '/../lib/simulator_manager/simulator_mgr'
 require './stubs/simulators_provider_stub'
 
 class SimulatorMgrTests < Test::Unit::TestCase
@@ -14,6 +14,6 @@ class SimulatorMgrTests < Test::Unit::TestCase
     sut = SimulatorManager.new(simulators_provider_stub)
     devices = sut.list_devices('all')
     assert(!devices.nil?)
-    assert(devices.count == 2)
+    assert(devices.count == 23)
   end
 end

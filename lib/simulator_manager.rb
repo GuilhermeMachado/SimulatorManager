@@ -1,8 +1,8 @@
 require 'pathname'
 require 'optimist'
-require './simulator_manager/simulator'
-require './simulator_manager/simulator_mgr'
-require './simulator_manager/ui_message'
+require File.expand_path('simulator_manager/simulator', File.dirname(__FILE__))
+require File.expand_path('simulator_manager/simulator_mgr', File.dirname(__FILE__))
+require File.expand_path('simulator_manager/ui_message', File.dirname(__FILE__))
 
 ui_message = UIMessage.new
 
