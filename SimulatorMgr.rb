@@ -10,11 +10,11 @@ class SimulatorManager
     create_simulators
   end
 
-  def list_devices(nameFilter)
+  def list_devices(name_filter)
     filtered = simulators
 
-    if nameFilter != 'all'
-      filtered = simulators.select { |simulator| simulator.name.include? nameFilter }
+    if name_filter != 'all'
+      filtered = simulators.select { |simulator| simulator.name.include? name_filter }
 
       if filtered.empty?
         show_error_message('No simulator was found with provided name filter')
@@ -42,7 +42,7 @@ class SimulatorManager
   end
 
   def start_device(udid)
-    simulator = fine_simulator_by_udid(udid)
+    simulator = find_simulator_by_udid(udid)
 
     if simulator.booted == true
       show_error_message('Simulator already booted')
@@ -62,7 +62,7 @@ class SimulatorManager
   end
 
   def shutdown_device(udid)
-    simulator = fine_simulator_by_udid(udid)
+    simulator = find_simulator_by_udid(udid)
 
     show_warning_message('Simulator already offline') if simulator.booted == false
 
@@ -82,7 +82,7 @@ class SimulatorManager
     puts 'SimulatorManager => Path => ' + path
     puts 'SimulatorManager => udid => ' + udid
 
-    simulator = fine_simulator_by_udid(udid)
+    simulator = find_simulator_by_udid(udid)
 
     start_device(simulator.udid) if simulator.booted == false
 
@@ -111,7 +111,7 @@ class SimulatorManager
   end
 
   def remove_application(udid, bundle)
-    simulator = fine_simulator_by_udid(udid)
+    simulator = find_simulator_by_udid(udid)
 
     if !find_application_in_simulator(udid, bundle).empty?
       puts show_success_message('App localizado')
@@ -121,7 +121,7 @@ class SimulatorManager
     end
   end
 
-  def fine_simulator_by_udid(udid)
+  def find_simulator_by_udid(udid)
     simulator = simulators.select { |simulator| simulator.udid == udid }.first
 
     if simulator.nil?
