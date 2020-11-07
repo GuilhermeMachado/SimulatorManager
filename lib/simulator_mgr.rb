@@ -2,6 +2,7 @@ require 'open3'
 require 'colorize'
 require './simulator'
 require './ui_message'
+require './simulators_provider'
 
 class SimulatorManager
   attr_accessor :simulators
