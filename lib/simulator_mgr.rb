@@ -1,16 +1,17 @@
 require 'open3'
 require 'colorize'
-require 'json'
 require './simulator'
 require './ui_message'
 
 class SimulatorManager
   attr_accessor :simulators
   attr_accessor :ui_message
+  attr_accessor :simulators_provider
 
-  def initialize
+  def initialize(simulators_provider = SimulatorsProvider.new)
     @simulators = []
     @ui_message = UIMessage.new
+    @simulators_provider = simulators_provider
     create_simulators
   end
 
@@ -139,7 +140,7 @@ class SimulatorManager
   private
 
   def create_simulators
-    devices = JSON.parse `xcrun simctl list -j devices`
+    devices = simulators_provider.simulators_json
 
     devices['devices'].each do |_runtime, runtime_devices|
       runtime_devices.each do |device|

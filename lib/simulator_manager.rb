@@ -3,6 +3,7 @@ require 'optimist'
 require './simulator'
 require './simulator_mgr'
 require './ui_message'
+require './simulators_provider'
 
 ui_message = UIMessage.new
 
