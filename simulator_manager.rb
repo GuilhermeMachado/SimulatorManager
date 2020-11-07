@@ -1,7 +1,7 @@
 require 'pathname'
 require 'optimist'
-require './Simulator'
-require './SimulatorMgr'
+require './simulator'
+require './simulator_mgr'
 
 #### Main
 def show_error_message(message)

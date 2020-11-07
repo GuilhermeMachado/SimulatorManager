@@ -1,5 +1,3 @@
-require 'JSON'
-
 class Simulator
   attr_accessor :name
   attr_accessor :udid

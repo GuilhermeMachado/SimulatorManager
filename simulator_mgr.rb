@@ -1,6 +1,7 @@
 require 'open3'
 require 'colorize'
-require './Simulator.rb'
+require 'json'
+require './simulator.rb'
 
 class SimulatorManager
   attr_accessor :simulators
