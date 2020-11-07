@@ -51,7 +51,7 @@ build-iPhoneSimulator/
 
 # test files
 
-*.json
+favorite_simulator.json
 
 # macOS
 
