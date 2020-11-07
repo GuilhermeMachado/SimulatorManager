@@ -1,8 +1,8 @@
 require 'open3'
 require 'colorize'
-require File.expand_path(File.dirname(__FILE__) + '/simulator')
-require File.expand_path(File.dirname(__FILE__) + '/ui_message')
-require File.expand_path(File.dirname(__FILE__) + '/simulators_provider')
+require './simulator_manager/simulator'
+require './simulator_manager/ui_message'
+require './simulator_manager/simulators_provider'
 
 class SimulatorManager
   attr_accessor :simulators

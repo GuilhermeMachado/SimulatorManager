@@ -1,8 +1,8 @@
 require 'pathname'
 require 'optimist'
-require './simulator'
-require './simulator_mgr'
-require './ui_message'
+require './simulator_manager/simulator'
+require './simulator_manager/simulator_mgr'
+require './simulator_manager/ui_message'
 
 ui_message = UIMessage.new
 

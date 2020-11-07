@@ -1,5 +1,5 @@
 require 'json'
-require './simulator_mgr'
+require './simulator_manager/simulator_mgr'
 
 begin
   favorite_simulator_json_file = File.read('./favorite_simulator.json')
