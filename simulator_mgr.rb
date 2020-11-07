@@ -1,13 +1,16 @@
 require 'open3'
 require 'colorize'
 require 'json'
-require './simulator.rb'
+require './simulator'
+require './ui_message'
 
 class SimulatorManager
   attr_accessor :simulators
+  attr_accessor :ui_message
 
   def initialize
     @simulators = []
+    @ui_message = UIMessage.new
     create_simulators
   end
 
@@ -18,7 +21,7 @@ class SimulatorManager
       filtered = simulators.select { |simulator| simulator.name.include? name_filter }
 
       if filtered.empty?
-        show_error_message('No simulator was found with provided name filter')
+        ui_message.show_error_message('No simulator was found with provided name filter')
         exit(1)
       end
     end
@@ -46,7 +49,7 @@ class SimulatorManager
     simulator = find_simulator_by_udid(udid)
 
     if simulator.booted == true
-      show_error_message('Simulator already booted')
+      ui_message.how_error_message('Simulator already booted')
       exit(1)
     end
 
@@ -55,9 +58,9 @@ class SimulatorManager
     _, status = Process.waitpid2(pid)
 
     if status.success?
-      show_success_message('Device booted ' + udid)
+      ui_message.show_success_message('Device booted ' + udid)
     else
-      show_error_message('Error while booting the device')
+      ui_message.show_error_message('Error while booting the device')
       exit(1)
     end
   end
@@ -65,16 +68,16 @@ class SimulatorManager
   def shutdown_device(udid)
     simulator = find_simulator_by_udid(udid)
 
-    show_warning_message('Simulator already offline') if simulator.booted == false
+    ui_message.show_warning_message('Simulator already offline') if simulator.booted == false
 
     pid = fork { exec('xcrun simctl shutdown ' + udid) }
     puts 'Turning off device 📲  => ' + udid
     _, status = Process.waitpid2(pid)
 
     if status.success?
-      show_success_message('Device offline ' + udid)
+      ui_message.show_success_message('Device offline ' + udid)
     else
-      show_error_message('Error while Turning off the device')
+      ui_message.show_error_message('Error while Turning off the device')
       exit(1)
     end
   end
@@ -90,10 +93,10 @@ class SimulatorManager
     unless bundle.nil?
       puts 'SimulatorManager => bundle => ' + bundle
       if !find_application_in_simulator(simulator.udid, bundle).empty?
-        puts show_success_message('App localizado')
+        puts ui_message.show_success_message('App localizado')
         remove_application_from_simulator(simulator.udid, bundle)
       else
-        show_error_message('App não localizado')
+        ui_message.show_error_message('App não localizado')
       end
     end
     puts 'SimulatorManager => Next command => ' + 'xcrun simctl install "' + simulator.udid + '" "' + path + '"'
@@ -102,11 +105,11 @@ class SimulatorManager
     _, status = Process.waitpid2(pid)
 
     if status.success?
-      show_success_message('APPLICATION INSTALLED INTO ' + simulator.udid)
-      show_success_message(path)
+      ui_message.show_success_message('APPLICATION INSTALLED INTO ' + simulator.udid)
+      ui_message.show_success_message(path)
       shutdown_device(simulator.udid)
     else
-      show_error_message('Error while installing the app into simulator.')
+      ui_message.show_error_message('Error while installing the app into simulator.')
       exit(1)
     end
   end
@@ -115,10 +118,10 @@ class SimulatorManager
     simulator = find_simulator_by_udid(udid)
 
     if !find_application_in_simulator(udid, bundle).empty?
-      puts show_success_message('App localizado')
+      puts ui_message.show_success_message('App localizado')
       remove_application_from_simulator(udid, bundle)
     else
-      show_error_message('App not found into simulator ' + udid)
+      ui_message.show_error_message('App not found into simulator ' + udid)
     end
   end
 
@@ -126,7 +129,7 @@ class SimulatorManager
     simulator = simulators.select { |simulator| simulator.udid == udid }.first
 
     if simulator.nil?
-      show_error_message('Simulator not found')
+      ui_message.show_error_message('Simulator not found')
       exit(1)
     end
 
@@ -158,7 +161,7 @@ class SimulatorManager
     if status.success?
       puts '❎   App ' + bundle + ' removed from ' + udid
     else
-      show_error_message('Error while removing app')
+      ui_message.show_error_message('Error while removing app')
       exit(1)
     end
   end

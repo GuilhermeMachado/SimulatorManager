@@ -2,19 +2,9 @@ require 'pathname'
 require 'optimist'
 require './simulator'
 require './simulator_mgr'
+require './ui_message'
 
-#### Main
-def show_error_message(message)
-  puts "❌   #{message}".red
-end
-
-def show_success_message(message)
-  puts "✅   #{message}".green
-end
-
-def show_warning_message(message)
-  puts "⚠️   #{message}".yellow
-end
+ui_message = UIMessage.new
 
 opts = Optimist.options do
   opt :start, 'Boot a device with id', short: :s
@@ -37,7 +27,7 @@ if opts[:start]
     m = SimulatorManager.new
     m.start_device(opts[:device])
   else
-    show_error_message('Not found required params --device')
+    ui_message.show_error_message('Not found required params --device')
   end
 end
 
@@ -46,17 +36,17 @@ if opts[:shutdown]
     m = SimulatorManager.new
     m.shutdown_device(opts[:device])
   else
-    show_error_message('Not found required params --device')
+    ui_message.show_error_message('Not found required params --device')
   end
 end
 
 if opts[:install]
   if !opts[:app].nil? && !opts[:device].nil?
-    show_warning_message('Not found bundle param. The application will not be reinstalled') if opts[:bundle].nil?
+    ui_message.show_warning_message('Not found bundle param. The application will not be reinstalled') if opts[:bundle].nil?
     m = SimulatorManager.new
     m.install_app(opts[:app], opts[:device], opts[:bundle])
   else
-    show_error_message('Not found required params --app && --device')
+    ui_message.show_error_message('Not found required params --app && --device')
   end
 end
 
@@ -65,6 +55,6 @@ if opts[:remove]
     m = SimulatorManager.new
     m.remove_application(opts[:device], opts[:bundle])
   else
-    show_error_message('Not found required params --device')
+    ui_message.show_error_message('Not found required params --device')
   end
 end
