@@ -19,14 +19,9 @@ class SimulatorManager
   def list_devices(name_filter)
     filtered = simulators
 
-    if name_filter != 'all'
-      filtered = simulators.select { |simulator| simulator.name.include? name_filter }
+    filtered = simulators.select { |simulator| simulator.name.include? name_filter } if name_filter != 'all'
 
-      if filtered.empty?
-        ui_message.show_error_message('No simulator was found with provided name filter')
-        exit(1)
-      end
-    end
+    ui_message.show_error_message('No simulator was found with provided name filter') if filtered.empty?
 
     filtered.each do |simulator|
       puts ''

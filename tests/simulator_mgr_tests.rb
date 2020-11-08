@@ -12,8 +12,27 @@ class SimulatorMgrTests < Test::Unit::TestCase
   def test_list_devices_given_all_parameter
     simulators_provider_stub = SimulatorsProviderStub.new('./resources/mock.json')
     sut = SimulatorManager.new(simulators_provider_stub)
+
     devices = sut.list_devices('all')
-    assert(!devices.nil?)
+
     assert(devices.count == 23)
+  end
+
+  def test_list_devices_given_valid_parameter
+    simulators_provider_stub = SimulatorsProviderStub.new('./resources/mock.json')
+    sut = SimulatorManager.new(simulators_provider_stub)
+
+    devices = sut.list_devices('iPhone')
+
+    assert(devices.count == 10)
+  end
+
+  def test_list_devices_given_invalid_parameter
+    simulators_provider_stub = SimulatorsProviderStub.new('./resources/mock.json')
+    sut = SimulatorManager.new(simulators_provider_stub)
+
+    devices = sut.list_devices('xiaomi')
+
+    assert(devices.count.zero?)
   end
 end
