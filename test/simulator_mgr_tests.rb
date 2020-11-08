@@ -1,12 +1,19 @@
 require 'test/unit'
 require File.expand_path('helper', __dir__)
+require File.expand_path('resource_helper', __dir__)
 require File.expand_path('stubs/simulators_provider_stub', __dir__)
 require File.expand_path('stubs/ui_message_spy', __dir__)
 require 'simulator_manager/simulator_mgr'
 
 class SimulatorMgrTests < Test::Unit::TestCase
+  attr_accessor :resource_helper
+
+  def setup
+    @resource_helper = ResourceHelper.new
+  end
+
   def test_list_devices_given_all_parameter
-    file = File.expand_path('resources/mock.json', __dir__)
+    file = resource_helper.find_file('mock.json')
     simulators_provider_stub = SimulatorsProviderStub.new(file)
     sut = SimulatorManager.new(simulators_provider_stub)
 
@@ -16,7 +23,7 @@ class SimulatorMgrTests < Test::Unit::TestCase
   end
 
   def test_list_devices_given_valid_parameter
-    file = File.expand_path('resources/mock.json', __dir__)
+    file = resource_helper.find_file('mock.json')
     simulators_provider_stub = SimulatorsProviderStub.new(file)
     sut = SimulatorManager.new(simulators_provider_stub)
 
@@ -26,7 +33,7 @@ class SimulatorMgrTests < Test::Unit::TestCase
   end
 
   def test_list_devices_given_invalid_parameter
-    file = File.expand_path('resources/mock.json', __dir__)
+    file = resource_helper.find_file('mock.json')
     simulators_provider_stub = SimulatorsProviderStub.new(file)
     sut = SimulatorManager.new(simulators_provider_stub)
 
@@ -36,7 +43,7 @@ class SimulatorMgrTests < Test::Unit::TestCase
   end
 
   def test_start_device_given_booted_device
-    file = File.expand_path('resources/booted_simulator.json', __dir__)
+    file = resource_helper.find_file('booted_simulator.json')
     simulators_provider_stub = SimulatorsProviderStub.new(file)
     ui_message_spy = UIMessageSpy.new
     sut = SimulatorManager.new(simulators_provider_stub, ui_message_spy)
