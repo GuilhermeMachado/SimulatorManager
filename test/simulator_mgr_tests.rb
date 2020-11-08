@@ -19,7 +19,7 @@ class SimulatorMgrTests < Test::Unit::TestCase
 
     devices = sut.list_devices('all')
 
-    assert(devices.count == 23)
+    assert_equal(23, devices.count)
   end
 
   def test_list_devices_given_valid_parameter
@@ -29,7 +29,7 @@ class SimulatorMgrTests < Test::Unit::TestCase
 
     devices = sut.list_devices('iPhone')
 
-    assert(devices.count == 10)
+    assert_equal(10, devices.count)
   end
 
   def test_list_devices_given_invalid_parameter
