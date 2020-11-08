@@ -1,3 +1,5 @@
+[![YourActionName Actions Status](https://github.com/GuilhermeMachado/SimulatorManager/workflows/Ruby/badge.svg)](https://github.com/GuilhermeMachado/SimulatorManager/actions)
+
 # SimulatorManager
 
 ## Usage
