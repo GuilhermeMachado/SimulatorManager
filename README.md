@@ -1,4 +1,4 @@
-[![YourActionName Actions Status](https://github.com/GuilhermeMachado/SimulatorManager/workflows/Ruby/badge.svg)](https://github.com/GuilhermeMachado/SimulatorManager/actions)
+[![test](https://github.com/GuilhermeMachado/SimulatorManager/workflows/test/badge.svg)](https://github.com/GuilhermeMachado/SimulatorManager/actions)
 
 # SimulatorManager
 
