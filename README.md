@@ -1,4 +1,4 @@
-[![test](https://github.com/GuilhermeMachado/SimulatorManager/workflows/test/badge.svg)](https://github.com/GuilhermeMachado/SimulatorManager/actions)
+[![build](https://github.com/GuilhermeMachado/SimulatorManager/workflows/build/badge.svg)](https://github.com/GuilhermeMachado/SimulatorManager/actions)
 
 # SimulatorManager
 
