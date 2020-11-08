@@ -1,6 +1,7 @@
 require 'test/unit'
-require File.dirname(__FILE__) + '/../lib/simulator_manager/simulator_mgr'
-require './stubs/simulators_provider_stub'
+require File.expand_path('helper', __dir__)
+require File.expand_path('stubs/simulators_provider_stub', __dir__)
+require 'simulator_manager/simulator_mgr'
 
 class SimulatorMgrTests < Test::Unit::TestCase
   # def setup
@@ -10,7 +11,8 @@ class SimulatorMgrTests < Test::Unit::TestCase
   # end
 
   def test_list_devices_given_all_parameter
-    simulators_provider_stub = SimulatorsProviderStub.new('./resources/mock.json')
+    file = File.expand_path('resources/mock.json', __dir__)
+    simulators_provider_stub = SimulatorsProviderStub.new(file)
     sut = SimulatorManager.new(simulators_provider_stub)
 
     devices = sut.list_devices('all')
@@ -19,7 +21,8 @@ class SimulatorMgrTests < Test::Unit::TestCase
   end
 
   def test_list_devices_given_valid_parameter
-    simulators_provider_stub = SimulatorsProviderStub.new('./resources/mock.json')
+    file = File.expand_path('resources/mock.json', __dir__)
+    simulators_provider_stub = SimulatorsProviderStub.new(file)
     sut = SimulatorManager.new(simulators_provider_stub)
 
     devices = sut.list_devices('iPhone')
@@ -28,7 +31,8 @@ class SimulatorMgrTests < Test::Unit::TestCase
   end
 
   def test_list_devices_given_invalid_parameter
-    simulators_provider_stub = SimulatorsProviderStub.new('./resources/mock.json')
+    file = File.expand_path('resources/mock.json', __dir__)
+    simulators_provider_stub = SimulatorsProviderStub.new(file)
     sut = SimulatorManager.new(simulators_provider_stub)
 
     devices = sut.list_devices('xiaomi')

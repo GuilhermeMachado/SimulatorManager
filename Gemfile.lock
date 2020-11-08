@@ -9,7 +9,9 @@ GEM
     parallel (1.19.2)
     parser (2.7.2.0)
       ast (~> 2.4.1)
+    power_assert (1.1.7)
     rainbow (3.0.0)
+    rake (13.0.1)
     regexp_parser (1.8.2)
     rexml (3.2.3)
     rubocop (0.93.1)
@@ -24,6 +26,8 @@ GEM
     rubocop-ast (1.1.0)
       parser (>= 2.7.1.5)
     ruby-progressbar (1.10.1)
+    test-unit (3.3.4)
+      power_assert
     unicode-display_width (1.7.0)
 
 PLATFORMS
@@ -34,7 +38,9 @@ DEPENDENCIES
   json
   open3
   optimist
+  rake
   rubocop
+  test-unit
 
 BUNDLED WITH
    2.1.4

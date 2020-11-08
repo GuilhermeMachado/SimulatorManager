@@ -1,5 +1,6 @@
 require 'test/unit'
-require File.dirname(__FILE__) + '/../lib/simulator_manager/simctl_query_builder'
+require File.expand_path('helper', __dir__)
+require 'simulator_manager/simctl_query_builder'
 
 class SimctlQueryBuilderTests < Test::Unit::TestCase
   def test_build_command_given_required_parameter
