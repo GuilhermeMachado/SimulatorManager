@@ -1,6 +1,6 @@
 require 'colorize'
 
-class UIMessage
+class UIMessageSpy
   attr_accessor :show_error_message_passed
   attr_accessor :show_success_message_passed
   attr_accessor :show_warning_message_passed

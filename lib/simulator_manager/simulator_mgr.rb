@@ -46,19 +46,18 @@ class SimulatorManager
     simulator = find_simulator_by_udid(udid)
 
     if simulator.booted == true
-      ui_message.how_error_message('Simulator already booted')
-      exit(1)
-    end
-
-    pid = fork { exec('xcrun simctl boot ' + udid) }
-    puts 'Booting device 📲  => ' + udid
-    _, status = Process.waitpid2(pid)
-
-    if status.success?
-      ui_message.show_success_message('Device booted ' + udid)
+      ui_message.show_error_message('Simulator already booted')
     else
-      ui_message.show_error_message('Error while booting the device')
-      exit(1)
+      pid = fork { exec('xcrun simctl boot ' + udid) }
+      puts 'Booting device 📲  => ' + udid
+      _, status = Process.waitpid2(pid)
+
+      if status.success?
+        ui_message.show_success_message('Device booted ' + udid)
+      else
+        ui_message.show_error_message('Error while booting the device')
+        exit(1)
+      end
     end
   end
 
