@@ -9,9 +9,9 @@ class SimulatorManager
   attr_accessor :ui_message
   attr_accessor :simulators_provider
 
-  def initialize(simulators_provider = SimulatorsProvider.new)
+  def initialize(simulators_provider = SimulatorsProvider.new, ui_message = UIMessage.new)
     @simulators = []
-    @ui_message = UIMessage.new
+    @ui_message = ui_message
     @simulators_provider = simulators_provider
     create_simulators
   end

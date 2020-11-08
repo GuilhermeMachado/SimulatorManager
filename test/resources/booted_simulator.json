@@ -1,0 +1,12 @@
+{
+    "devices" : {
+        "com.apple.CoreSimulator.SimRuntime.iOS-14-1" : [
+        {
+          "udid" : "68C69164-A164-4127-8668-E97C18E062C4",
+          "isAvailable" : true,
+          "state" : "Booted",
+          "name" : "iPhone 8"
+        }
+      ]
+    }
+  }
