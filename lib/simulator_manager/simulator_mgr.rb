@@ -3,16 +3,25 @@ require 'colorize'
 require File.dirname(__FILE__) + '/simulator'
 require File.dirname(__FILE__) + '/ui_message'
 require File.dirname(__FILE__) + '/simulators_provider'
+require File.dirname(__FILE__) + '/simctl_query_builder'
+require File.dirname(__FILE__) + '/process_runner'
 
 class SimulatorManager
   attr_accessor :simulators
   attr_accessor :ui_message
   attr_accessor :simulators_provider
+  attr_accessor :simctl_query_builder
+  attr_accessor :process_runner
 
-  def initialize(simulators_provider = SimulatorsProvider.new, ui_message = UIMessage.new)
+  def initialize(simulators_provider = SimulatorsProvider.new,
+                 ui_message = UIMessage.new,
+                 simctl_query_builder = SimctlQueryBuilder.new,
+                 process_runner = ProcessRunner.new)
     @simulators = []
     @ui_message = ui_message
     @simulators_provider = simulators_provider
+    @simctl_query_builder = simctl_query_builder
+    @process_runner = process_runner
     create_simulators
   end
 
