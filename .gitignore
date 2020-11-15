@@ -56,3 +56,7 @@ favorite_simulator.json
 # macOS
 
 .DS_Store
+
+# RubyMine
+
+.idea/
