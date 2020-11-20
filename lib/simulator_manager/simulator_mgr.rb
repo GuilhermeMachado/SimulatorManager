@@ -54,7 +54,7 @@ class SimulatorManager
   def start_device(udid)
     simulator = find_simulator_by_udid(udid)
 
-    if simulator.booted == true
+    if simulator.booted
       ui_message.show_error_message("Simulator already booted")
     else
       command = simctl_query_builder.build_command("boot", udid)
